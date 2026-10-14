@@ -1,0 +1,23 @@
+# ============================================================
+# NETLIFY DEPLOYMENT CONFIG
+# Netlify reads this file automatically when you import the repo.
+# - build.command: installs dependencies and builds the site
+# - build.publish: static assets output directory
+# - The server-rendered pages are deployed as a Netlify Function
+#   automatically (the build output adapter detects Netlify).
+# ============================================================
+
+[build]
+  command = "bun install && bun run build"
+  publish = ".output/public"
+
+[build.environment]
+  # Pin the Node version used on Netlify's build image.
+  NODE_VERSION = "22"
+
+# Pretty-URL handling: let the app's router own all routes.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
